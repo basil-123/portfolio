@@ -1,31 +1,29 @@
-// "use client";
-
-// import { Player } from "@lottiefiles/react-lottie-player";
-
-// export default function AnimatedBackground() {
-//   return (
-//     <div className="fixed top-0 left-0 w-full h-full z-[-1] opacity-30">
-//       <Player
-//         autoplay
-//         loop
-//         src= "/animations/Main.json" // place your .json in public/animations/
-//         style={{ height: "100%", width: "100%" }}
-//       />
-//     </div>
-//   );
-// }
 "use client";
 
 import { Player } from "@lottiefiles/react-lottie-player";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function AnimatedBackground({ opacity = 0 }: { opacity?: number }) {
   const playerRef = useRef<any>(null);
+  const [shouldAutoplay, setShouldAutoplay] = useState(true);
 
   useEffect(() => {
-    if (playerRef.current) {
-      playerRef.current.play();
-    }
+    // Add a small delay to ensure the player is fully mounted
+    const timer = setTimeout(() => {
+      if (playerRef.current) {
+        try {
+          // Force play the animation
+          playerRef.current.play();
+          console.log("Animation started manually");
+        } catch (error) {
+          console.error("Error playing Lottie animation:", error);
+          // If manual play fails, ensure autoplay is enabled
+          setShouldAutoplay(true);
+        }
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -42,8 +40,12 @@ export default function AnimatedBackground({ opacity = 0 }: { opacity?: number }
           objectFit: "cover",
           transform: "scale(1.05)"
         }}
-        loop
-        autoplay={false}
+        loop={true}
+        autoplay={shouldAutoplay}
+        speed={1}
+        rendererSettings={{
+          preserveAspectRatio: 'xMidYMid slice'
+        }}
       />
     </div>
   );
