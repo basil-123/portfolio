@@ -58,9 +58,9 @@
 "use client";
 
 import { useCallback } from "react";
-import Particles from "react-tsparticles";
-import type { Engine } from "tsparticles-engine";
-import { loadFull } from "tsparticles";
+import Particles from "@tsparticles/react";
+import type { Engine } from "@tsparticles/engine";
+import { loadFull } from "@tsparticles/all";
 
 export default function DataNetworkBackground() {
   const particlesInit = useCallback(async (engine: Engine) => {
