@@ -1,52 +1,39 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
-import Hero from "@/sections/hero";
-import Skills from "@/sections/skills";
-import Projects from "@/sections/projects";
-import About from "@/sections/about";
-import Contact from "@/sections/contact";
-import RevealOnScroll from "@/components/RevealOnScroll";
-import AnimatedBackground from "@/app/components/AnimatedBackground";
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("@/sections/hero"), { ssr: false });
+const Skills = dynamic(() => import("@/sections/skills"));
+const Projects = dynamic(() => import("@/sections/projects"));
+const About = dynamic(() => import("@/sections/about"));
+const Contact = dynamic(() => import("@/sections/contact"));
+const AnimatedBackground = dynamic(() => import("@/components/AnimatedBackground"), { ssr: false });
+const RevealOnScroll = dynamic(() => import("@/components/RevealOnScroll"));
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const { ref: heroRef, inView: heroInView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-  const { ref: contactRef, inView: contactInView } = useInView({
-    threshold: 0.5,
-    triggerOnce: false,
-  });
+  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
+  const { ref: contactRef, inView: contactInView } = useInView({ threshold: 0.5 });
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
+    setMounted(true);
+    const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const calculateOpacities = () => {
-    // When contact section is in view, return full particles opacity
-    if (contactInView) {
-      return { lottieOpacity: 0, particlesOpacity: 1 };
-    }
+    if (!mounted) return { lottieOpacity: 0, particlesOpacity: 1 };
+    if (contactInView) return { lottieOpacity: 0, particlesOpacity: 1 };
+    if (heroInView) return { lottieOpacity: 0, particlesOpacity: 1 };
 
-    // When hero is in view, show only particles
-    if (heroInView) {
-      return { lottieOpacity: 0, particlesOpacity: 1 };
-    }
-
-    // During scroll transition
     const windowHeight = window.innerHeight;
     const fadeStart = windowHeight * 0.2;
     const fadeEnd = windowHeight * 0.8;
     const scrollPosition = Math.min(scrollY, fadeEnd);
-    
     const progress = Math.min((scrollPosition - fadeStart) / (fadeEnd - fadeStart), 1);
     
     return {
@@ -57,15 +44,11 @@ export default function Home() {
 
   const { lottieOpacity, particlesOpacity } = calculateOpacities();
 
+  if (!mounted) return null;
+
   return (
     <>
-      {/* Lottie Background */}
-      <div
-        className="fixed inset-0 -z-10 transition-opacity duration-1000 ease-in-out"
-        style={{ opacity: lottieOpacity }}
-      >
-        <AnimatedBackground />
-      </div>
+      <AnimatedBackground opacity={lottieOpacity} />
 
       <main className="relative mx-auto max-w-5xl px-4 space-y-32 pb-32">
         <div ref={heroRef}>

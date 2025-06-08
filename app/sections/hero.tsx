@@ -1,77 +1,86 @@
 "use client";
 
-import { useCallback } from "react";
-import { Engine } from "tsparticles-engine";
-import { loadFull } from "tsparticles";
-import Particles from "react-tsparticles";
+import { useCallback, useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
+import { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import dynamic from "next/dynamic";
 
-interface HeroProps {
-  particlesOpacity?: number;
-}
+export default function Hero({ particlesOpacity = 1 }: { particlesOpacity?: number }) {
+  const [init, setInit] = useState(false);
 
-export default function Hero({ particlesOpacity = 1 }: HeroProps) {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine);
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
   }, []);
+
+  const Particles = init ? dynamic(() => import("@tsparticles/react").then((mod) => mod.Particles), {
+    ssr: false
+  }) : () => null;
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Particles background with dynamic opacity */}
-      <div 
-        className="absolute inset-0 -z-10 transition-opacity duration-1000 ease-in-out"
-        style={{ opacity: particlesOpacity }}
-      >
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          options={{
-            background: { color: { value: "transparent" } },
-            fpsLimit: 120,
-            particles: {
-              number: { 
-                value: 80, 
-                density: { 
-                  enable: true, 
-                  area: 800 
-                } 
+      {init && (
+        <div className="absolute inset-0 -z-10 transition-opacity duration-1000" style={{ opacity: particlesOpacity }}>
+          <Particles
+            id="tsparticles"
+            options={{
+              background: { color: { value: "transparent" } },
+              fpsLimit: 120,
+              interactivity: {
+                events: {
+                  onHover: {
+                    enable: true,
+                    mode: "repulse",
+                  },
+                },
               },
-              color: { value: "#ffffff" },
-              shape: { type: "circle" },
-              opacity: { 
-                value: { min: 0.1, max: 0.5 },
-                animation: { 
+              particles: {
+                color: { value: "#ffffff" },
+                links: {
+                  color: "#ffffff",
+                  distance: 150,
                   enable: true,
-                  speed: 1,
-                  sync: false
-                }
+                  opacity: 0.4,
+                  width: 1,
+                },
+                move: {
+                  enable: true,
+                  speed: 2,
+                  outModes: "bounce",
+                },
+                number: {
+                  density: {
+                    enable: true,
+                    area: 800,
+                  },
+                  value: 80,
+                },
+                opacity: {
+                  value: { min: 0.1, max: 0.5 },
+                  animation: {
+                    enable: true,
+                    speed: 1,
+                    sync: false
+                  }
+                },
+                shape: {
+                  type: "circle",
+                },
+                size: {
+                  value: { min: 1, max: 3 },
+                  random: true,
+                },
               },
-              size: { 
-                value: { min: 1, max: 3 },
-                random: true
-              },
-              move: { 
-                enable: true, 
-                speed: 1.5, 
-                direction: "none",
-                outModes: "bounce",
-                random: true,
-                straight: false
-              },
-              links: {
-                enable: true,
-                distance: 120,
-                color: "#ffffff",
-                opacity: 0.3,
-                width: 1,
-              },
-            },
-            detectRetina: true,
-          }}
-        />
-      </div>
+              detectRetina: true,
+            }}
+          />
+        </div>
+      )}
 
-      {/* Hero content */}
       <div className="max-w-3xl text-center w-full text-white z-10">
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
           <div>Hi, I'm</div>

@@ -17,33 +17,33 @@
 "use client";
 
 import { Player } from "@lottiefiles/react-lottie-player";
-import type { AnimationItem } from "lottie-web";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
-export default function AnimatedBackground() {
-  const [lottieInstance, setLottieInstance] = useState<AnimationItem | null>(null);
+export default function AnimatedBackground({ opacity = 0 }: { opacity?: number }) {
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
-    // Play a specific segment in loop: frames 0 to 120
-    if (lottieInstance) {
-      lottieInstance.playSegments([0, 120], true);
-      lottieInstance.setSubframe(false); // For better performance
+    if (playerRef.current) {
+      playerRef.current.play();
     }
-  }, [lottieInstance]);
+  }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div 
+      className="fixed inset-0 -z-10 transition-opacity duration-1000 ease-in-out"
+      style={{ opacity }}
+    >
       <Player
-        lottieRef={(instance: AnimationItem) => setLottieInstance(instance)}
+        ref={playerRef}
         src="/animations/grey.json"
-        autoplay={false}
-        loop
-        style={{
-          height: "100%",
+        style={{ 
+          height: "100%", 
           width: "100%",
-          objectFit: "cover", // Ensures full coverage without distortion
-          transform: "scale(1.1)", // Slightly larger to prevent edge gaps
+          objectFit: "cover",
+          transform: "scale(1.05)"
         }}
+        loop
+        autoplay={false}
       />
     </div>
   );
