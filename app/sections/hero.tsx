@@ -50,14 +50,15 @@ export default function Hero({ particlesOpacity = 1 }: { particlesOpacity?: numb
                 move: {
                   enable: true,
                   speed: 2,
-                  outModes: "bounce",
+                  outModes: {
+                    default: "bounce"
+                  },
                 },
                 number: {
+                  value: 80,
                   density: {
                     enable: true,
-                    area: 800,
                   },
-                  value: 80,
                 },
                 opacity: {
                   value: { min: 0.1, max: 0.5 },
@@ -71,8 +72,7 @@ export default function Hero({ particlesOpacity = 1 }: { particlesOpacity?: numb
                   type: "circle",
                 },
                 size: {
-                  value: { min: 1, max: 3 },
-                  random: true,
+                  value: { min: 1, max: 3 }
                 },
               },
               detectRetina: true,
@@ -81,6 +81,7 @@ export default function Hero({ particlesOpacity = 1 }: { particlesOpacity?: numb
         </div>
       )}
 
+      {/* Rest of your Hero component remains the same */}
       <div className="max-w-3xl text-center w-full text-white z-10">
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
           <div>Hi, I'm</div>
