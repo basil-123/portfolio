@@ -1,30 +1,47 @@
 "use client";
 
 import { Player } from "@lottiefiles/react-lottie-player";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AnimatedBackground({ opacity = 0 }: { opacity?: number }) {
-  const playerRef = useRef<any>(null);
-  const [shouldAutoplay, setShouldAutoplay] = useState(true);
+  const [modifiedSrc, setModifiedSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    // Add a small delay to ensure the player is fully mounted
-    const timer = setTimeout(() => {
-      if (playerRef.current) {
-        try {
-          // Force play the animation
-          playerRef.current.play();
-          console.log("Animation started manually");
-        } catch (error) {
-          console.error("Error playing Lottie animation:", error);
-          // If manual play fails, ensure autoplay is enabled
-          setShouldAutoplay(true);
-        }
-      }
-    }, 200);
+    // Load and modify the animation data to limit frames
+    fetch('/animations/grey.json')
+      .then(response => response.json())
+      .then(data => {
+        // Modify the JSON to limit frames to 120
+        const modifiedData = {
+          ...data,
+          op: Math.min(120, data.op || 120), // Set out point (end frame) to 120
+          ip: 0 // Set in point (start frame) to 0
+        };
+        
+        console.log(`Original frames: ${data.op}, Modified to: ${modifiedData.op}`);
+        
+        // Create a blob URL for the modified data
+        const blob = new Blob([JSON.stringify(modifiedData)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        setModifiedSrc(url);
+      })
+      .catch(error => {
+        console.error('Error loading animation:', error);
+        // Fallback to original file
+        setModifiedSrc('/animations/grey.json');
+      });
 
-    return () => clearTimeout(timer);
+    // Cleanup blob URL when component unmounts
+    return () => {
+      if (modifiedSrc && modifiedSrc.startsWith('blob:')) {
+        URL.revokeObjectURL(modifiedSrc);
+      }
+    };
   }, []);
+
+  if (!modifiedSrc) {
+    return null; // Show nothing while loading
+  }
 
   return (
     <div 
@@ -32,8 +49,7 @@ export default function AnimatedBackground({ opacity = 0 }: { opacity?: number }
       style={{ opacity }}
     >
       <Player
-        ref={playerRef}
-        src="/animations/grey.json"
+        src={modifiedSrc}
         style={{ 
           height: "100%", 
           width: "100%",
@@ -41,7 +57,7 @@ export default function AnimatedBackground({ opacity = 0 }: { opacity?: number }
           transform: "scale(1.05)"
         }}
         loop={true}
-        autoplay={shouldAutoplay}
+        autoplay={true}
         speed={1}
         rendererSettings={{
           preserveAspectRatio: 'xMidYMid slice'
