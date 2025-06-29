@@ -30,19 +30,25 @@ export default function Contact() {
           className="max-w-2xl mx-auto space-y-8 text-center"
         >
           <div className="flex flex-col items-center gap-4">
-            <div className="flex items-center gap-4">
+            <a href="mailto:basilvarghese012@gmail.com" className="flex items-center gap-4 hover:underline">
               <Mail className="w-6 h-6 text-primary" />
               <p className="text-muted-foreground">basilvarghese012@gmail.com</p>
-            </div>
-            <div className="flex items-center gap-4">
+            </a>
+            <a href="tel:+919562731781" className="flex items-center gap-4 hover:underline">
               <Phone className="w-6 h-6 text-primary" />
               <p className="text-muted-foreground">+91 9562731781</p>
-            </div>
-            <div className="flex items-center gap-4">
+            </a>
+            <a
+              href="https://www.google.com/maps?q=Ernakulam,+Kerala,+India"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 hover:underline"
+            >
               <MapPin className="w-6 h-6 text-primary" />
               <p className="text-muted-foreground">Ernakulam, Kerala, India</p>
-            </div>
+            </a>
           </div>
+
 
           {/* Social Links */}
           <div className="pt-6">
