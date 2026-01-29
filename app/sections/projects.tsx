@@ -1,11 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Github, ExternalLink } from 'lucide-react' // If you don't have lucide-react, let me know!
 
 export default function Projects() {
   return (
     <section id="projects" className="py-28 relative z-10">
-      {/* No background here — you already have one */}
       <div className="container mx-auto px-8 space-y-28">
         <h2 className="text-5xl font-extrabold text-center text-white mb-12">
           My Projects
@@ -19,7 +19,21 @@ export default function Projects() {
           viewport={{ once: true }}
           className="space-y-8 text-white"
         >
-          <h3 className="text-4xl font-bold">🎯 Integrated Attendance Monitoring & Fight Detection</h3>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <h3 className="text-4xl font-bold">🎯 Integrated Attendance Monitoring & Fight Detection</h3>
+            
+            {/* GITHUB LINK ADDED HERE */}
+            <a 
+              href="https://github.com/basil-123/Violence-Detection-" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-6 py-3 rounded-full hover:bg-white/20 transition-all text-lg font-medium"
+            >
+              <Github className="w-6 h-6" /> 
+              View Code
+            </a>
+          </div>
+
           <p className="text-2xl leading-relaxed">
             A smart AI-driven classroom system that automates student attendance and detects violent actions using real-time surveillance.
           </p>
@@ -42,7 +56,21 @@ export default function Projects() {
           viewport={{ once: true }}
           className="space-y-8 text-white"
         >
-          <h3 className="text-4xl font-bold">🌐 Edu-Pulse Hub – A Student Social Learning Platform</h3>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <h3 className="text-4xl font-bold">🌐 Edu-Pulse Hub</h3>
+            
+            {/* GITHUB LINK PLACEHOLDER */}
+            <a 
+              href="https://github.com/basil-123" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-6 py-3 rounded-full hover:bg-white/20 transition-all text-lg font-medium"
+            >
+              <Github className="w-6 h-6" /> 
+              View Code
+            </a>
+          </div>
+
           <p className="text-2xl leading-relaxed">
             An academic community platform designed for college students to collaborate, share study resources, and stay informed.
           </p>
@@ -65,7 +93,21 @@ export default function Projects() {
           viewport={{ once: true }}
           className="space-y-8 text-white"
         >
-          <h3 className="text-4xl font-bold">🛤️ Admin Panel for Train Booking</h3>
+           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <h3 className="text-4xl font-bold">🛤️ Admin Panel for Train Booking</h3>
+            
+            {/* GITHUB LINK PLACEHOLDER */}
+            <a 
+              href="https://github.com/basil-123" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-6 py-3 rounded-full hover:bg-white/20 transition-all text-lg font-medium"
+            >
+              <Github className="w-6 h-6" /> 
+              View Code
+            </a>
+          </div>
+
           <p className="text-2xl leading-relaxed">
             A web-based backend dashboard that simplifies train booking operations and manages real-time schedule and passenger data.
           </p>
