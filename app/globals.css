@@ -1,25 +1,15 @@
 @import "tailwindcss";
-
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 1. DEFAULT STATE (System is Light) 
-   Since we want the site to be DARK when system is Light, 
-   we put the DARK colors here. */
+/* ALWAYS DARK COLORS */
 :root {
   --background: #0a0a0a;  /* Dark Background */
   --foreground: #ededed;  /* Light Text */
 }
 
-/* 2. DARK STATE (System is Dark)
-   next-themes adds the .dark class when the system is Dark.
-   Since we want the site to be LIGHT when system is Dark,
-   we put the LIGHT colors here. */
-.dark {
-  --background: #ffffff;  /* Light Background */
-  --foreground: #171717;  /* Dark Text */
-}
+/* We don't need a .dark block anymore because :root is already dark. */
 
 @theme inline {
   --color-background: var(--background);
