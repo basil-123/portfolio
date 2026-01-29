@@ -24,7 +24,7 @@ export default function Projects() {
             
             {/* GITHUB LINK ADDED HERE */}
             <a 
-              href="https://github.com/basil-123/Violence-Detection-" 
+              href="https://github.com/basil-123/Violence-Detection" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-6 py-3 rounded-full hover:bg-white/20 transition-all text-lg font-medium"
