@@ -1,40 +1,107 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* ALWAYS DARK COLORS */
 :root {
-  --background: #0a0a0a;  /* Dark Background */
-  --foreground: #ededed;  /* Light Text */
+  --background: #f8fafc; /* Subtle, clean light off-white (slate-50) */
+  --foreground: #0f172a; /* Slate 900 */
+  
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  
+  --primary: #4f46e5; /* Indigo 600 */
+  --primary-foreground: #ffffff;
+  
+  --secondary: #f1f5f9; /* Slate 100 */
+  --secondary-foreground: #0f172a;
+  
+  --muted: #f8fafc;
+  --muted-foreground: #64748b; /* Slate 500 */
+  
+  --accent: #e0e7ff; /* Indigo 100 */
+  --accent-foreground: #4338ca; /* Indigo 700 */
+  
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  
+  --border: #e2e8f0; /* Slate 200 */
+  --input: #e2e8f0;
+  --ring: #6366f1; /* Indigo 500 */
+  
+  --radius: 0.75rem;
 }
-
-/* We don't need a .dark block anymore because :root is already dark. */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
-@keyframes pulseGrid {
+/* Professional design pattern: Grid background with fading mask */
+.grid-bg {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.12) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+  background-position: 0px 0px;
+}
+
+/* Subtle dot background alternative */
+.dot-bg {
+  background-image: radial-gradient(rgba(99, 102, 241, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+/* Shadow for stacked papers */
+.paper-shadow {
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.02),
+    0 8px 24px rgba(15, 23, 42, 0.04),
+    0 20px 48px rgba(15, 23, 42, 0.06);
+}
+
+.paper-stack-bottom-1 {
+  box-shadow: 
+    0 1px 1px rgba(0,0,0,0.05),
+    0 4px 6px rgba(0,0,0,0.02);
+}
+
+@keyframes float {
   0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
+    transform: translateY(0px);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.01);
+    transform: translateY(-8px);
   }
 }
 
-.animate-pulseGrid {
-  animation: pulseGrid 8s ease-in-out infinite;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
