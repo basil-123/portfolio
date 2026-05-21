@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Download } from 'lucide-react'
+import DossierSearch from '@/components/DossierSearch'
 
 export default function About() {
   return (
@@ -82,6 +83,8 @@ export default function About() {
             </div>
           </div>
         </motion.div>
+
+        <DossierSearch />
       </div>
     </section>
   )
