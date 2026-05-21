@@ -162,22 +162,39 @@ export default function Projects() {
   const points = [0, 0.15, 0.35, 0.45, 0.65, 0.75, 0.95, 1.0]
 
   // Heights: 48px collapsed, 480px expanded (active POV is slightly upper to reveal lower pages)
-  const h1 = useTransform(scrollYProgress, points, [520, 520, 48, 48, 48, 48, 48, 48])
-  const h2 = useTransform(scrollYProgress, points, [48, 48, 520, 520, 48, 48, 48, 48])
-  const h3 = useTransform(scrollYProgress, points, [48, 48, 48, 48, 520, 520, 48, 48])
-  const h4 = useTransform(scrollYProgress, points, [48, 48, 48, 48, 48, 48, 520, 520])
+  const h1 = useTransform(scrollYProgress, points, isMobile 
+    ? [380, 380, 40, 40, 40, 40, 40, 40] 
+    : [520, 520, 48, 48, 48, 48, 48, 48])
+  const h2 = useTransform(scrollYProgress, points, isMobile 
+    ? [40, 40, 380, 380, 40, 40, 40, 40] 
+    : [48, 48, 520, 520, 48, 48, 48, 48])
+  const h3 = useTransform(scrollYProgress, points, isMobile 
+    ? [40, 40, 40, 40, 380, 380, 40, 40] 
+    : [48, 48, 48, 48, 520, 520, 48, 48])
+  const h4 = useTransform(scrollYProgress, points, isMobile 
+    ? [40, 40, 40, 40, 40, 40, 380, 380] 
+    : [48, 48, 48, 48, 48, 48, 520, 520])
 
   // rotateX: 0deg active (parallel to screen), 68deg collapsed (lying flat on desk, slightly upper POV)
-  const rx1 = useTransform(scrollYProgress, points, [0, 0, 68, 68, 68, 68, 68, 68])
-  const rx2 = useTransform(scrollYProgress, points, [68, 68, 0, 0, 68, 68, 68, 68])
-  const rx3 = useTransform(scrollYProgress, points, [68, 68, 68, 68, 0, 0, 68, 68])
-  const rx4 = useTransform(scrollYProgress, points, [68, 68, 68, 68, 68, 68, 0, 0])
+  const rx_val = isMobile ? 55 : 68
+  const rx1 = useTransform(scrollYProgress, points, [0, 0, rx_val, rx_val, rx_val, rx_val, rx_val, rx_val])
+  const rx2 = useTransform(scrollYProgress, points, [rx_val, rx_val, 0, 0, rx_val, rx_val, rx_val, rx_val])
+  const rx3 = useTransform(scrollYProgress, points, [rx_val, rx_val, rx_val, rx_val, 0, 0, rx_val, rx_val])
+  const rx4 = useTransform(scrollYProgress, points, [rx_val, rx_val, rx_val, rx_val, rx_val, rx_val, 0, 0])
 
   // y: vertical positioning inside the 3D space
-  const y1 = useTransform(scrollYProgress, points, [20, 20, -40, -40, -40, -40, -40, -40])
-  const y2 = useTransform(scrollYProgress, points, [540, 540, 20, 20, -16, -16, -16, -16])
-  const y3 = useTransform(scrollYProgress, points, [564, 564, 564, 564, 20, 20, 8, 8])
-  const y4 = useTransform(scrollYProgress, points, [588, 588, 588, 588, 588, 588, 20, 20])
+  const y1 = useTransform(scrollYProgress, points, isMobile
+    ? [20, 20, -30, -30, -30, -30, -30, -30]
+    : [20, 20, -40, -40, -40, -40, -40, -40])
+  const y2 = useTransform(scrollYProgress, points, isMobile
+    ? [400, 400, 20, 20, -10, -10, -10, -10]
+    : [540, 540, 20, 20, -16, -16, -16, -16])
+  const y3 = useTransform(scrollYProgress, points, isMobile
+    ? [420, 420, 420, 420, 20, 20, 10, 10]
+    : [564, 564, 564, 564, 20, 20, 8, 8])
+  const y4 = useTransform(scrollYProgress, points, isMobile
+    ? [440, 440, 440, 440, 440, 440, 20, 20]
+    : [588, 588, 588, 588, 588, 588, 20, 20])
 
   // z: translation along Z-axis (lifts up closer to viewer when active)
   const z1 = useTransform(scrollYProgress, points, [40, 40, -30, -30, -30, -30, -30, -30])
@@ -186,10 +203,18 @@ export default function Projects() {
   const z4 = useTransform(scrollYProgress, points, [0, 0, 0, 0, 0, 0, 40, 40])
 
   // x: horizontal offsets when collapsed, 0 when active
-  const x1 = useTransform(scrollYProgress, points, [0, 0, -6, -6, -6, -6, -6, -6])
-  const x2 = useTransform(scrollYProgress, points, [8, 8, 0, 0, 8, 8, 8, 8])
-  const x3 = useTransform(scrollYProgress, points, [-4, -4, -4, -4, 0, 0, -4, -4])
-  const x4 = useTransform(scrollYProgress, points, [6, 6, 6, 6, 6, 6, 0, 0])
+  const x1 = useTransform(scrollYProgress, points, isMobile
+    ? [0, 0, -3, -3, -3, -3, -3, -3]
+    : [0, 0, -6, -6, -6, -6, -6, -6])
+  const x2 = useTransform(scrollYProgress, points, isMobile
+    ? [4, 4, 0, 0, 4, 4, 4, 4]
+    : [8, 8, 0, 0, 8, 8, 8, 8])
+  const x3 = useTransform(scrollYProgress, points, isMobile
+    ? [-2, -2, -2, -2, 0, 0, -2, -2]
+    : [-4, -4, -4, -4, 0, 0, -4, -4])
+  const x4 = useTransform(scrollYProgress, points, isMobile
+    ? [3, 3, 3, 3, 3, 3, 0, 0]
+    : [6, 6, 6, 6, 6, 6, 0, 0])
 
   // zIndex: active card on top
   const zi1 = useTransform(scrollYProgress, points, [30, 30, 10, 10, 10, 10, 10, 10])
@@ -240,14 +265,9 @@ export default function Projects() {
   ]
 
   const handleCardClick = (idx: number, project: Project) => {
-    if (isMobile) {
-      setSelectedProject(project)
-      setActiveTab('editorial')
-      return
-    }
-
     const currentHeight = motionTransforms[idx].height.get();
-    if (currentHeight > 200) {
+    const activeThreshold = isMobile ? 150 : 200;
+    if (currentHeight > activeThreshold) {
       setSelectedProject(project)
       setActiveTab('editorial')
     } else {
@@ -276,322 +296,219 @@ export default function Projects() {
     <section 
       ref={containerRef} 
       id="projects" 
-      className={`relative z-10 bg-[#faf9f6]/40 border-t border-b border-slate-200/50 transition-all duration-300 ${
-        isMobile ? "h-auto py-16 px-4" : "h-[300vh]"
-      }`}
+      className="relative z-10 bg-[#faf9f6]/40 border-t border-b border-slate-200/50 h-[300vh]"
     >
-      {isMobile ? (
-        <div className="max-w-2xl mx-auto">
-          {/* Section Heading */}
-          <div className="text-center mb-10">
-            <span className="text-[10px] font-mono font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
-              Archive Sheets
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 mt-3 tracking-tight font-serif">
-              The Project Gazette
-            </h2>
-            <p className="text-slate-500 mt-2 text-xs leading-relaxed max-w-sm mx-auto">
-              A collection of deep learning, RAG systems, and AI agent architectures. Click any page to view its full technical dossier.
-            </p>
+      {/* Sticky Viewport Container */}
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-16 overflow-hidden">
+        
+        {/* Section Heading */}
+        <div className="text-center z-20 px-4 shrink-0 mb-6 sm:mb-12">
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+            Archive Sheets
+          </span>
+          <h2 className="text-2xl sm:text-5xl font-extrabold text-slate-900 mt-2 sm:mt-3 tracking-tight font-serif">
+            The Project Gazette
+          </h2>
+          <p className="text-slate-500 mt-2 max-w-md mx-auto text-[11px] sm:text-sm leading-relaxed px-4">
+            {isMobile 
+              ? "Scroll to stack/unstack each sheet in the pile. Tap any sheet to view its full dossier."
+              : "Scroll to expand each page in the vertical paper pile. Click any active sheet to view the full dossier."
+            }
+          </p>
+        </div>
+
+        {/* Progress Track and Stack Deck Wrapper */}
+        <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[520px] sm:h-[660px]">
+          
+          {/* Scroll Progress Timeline Track (Left Side) */}
+          <div className="relative w-0.5 bg-slate-200/80 hidden lg:block h-[450px] shrink-0 z-20">
+            <motion.div 
+              className="w-full bg-indigo-500 origin-top h-full" 
+              style={{ scaleY: scrollYProgress }} 
+            />
+            <div className="absolute top-0 -left-1.5 w-3.5 h-3.5 rounded-full bg-slate-200 border-2 border-white" />
+            <div className="absolute bottom-0 -left-1.5 w-3.5 h-3.5 rounded-full bg-indigo-500 border-2 border-white" />
           </div>
 
-          {/* Simple List of Cards */}
-          <div className="flex flex-col gap-8 w-full">
-            {projectsList.map((project, idx) => (
+          {/* Vertical Stack Deck - Styled like a 3D desk space */}
+          <div 
+            className="flex-1 relative h-full select-none"
+            style={{ 
+              perspective: "1800px", 
+              transformStyle: "preserve-3d" 
+            }}
+          >
+          {projectsList.map((project, idx) => {
+            const transforms = motionTransforms[idx]
+
+            return (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.05, ease: "easeOut" }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-white border border-slate-200/90 rounded-[6px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col justify-between cursor-pointer"
-                onClick={() => {
-                  setSelectedProject(project)
-                  setActiveTab('editorial')
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  width: "100%",
+                  height: transforms.height,
+                  rotateX: transforms.rotateX,
+                  x: transforms.x,
+                  y: transforms.y,
+                  z: transforms.z,
+                  zIndex: transforms.zIndex,
+                  boxShadow: transforms.shadow,
+                  transformStyle: "preserve-3d",
                 }}
+                className="bg-white border border-slate-200/90 rounded-[6px] transition-shadow relative overflow-hidden flex flex-col justify-between cursor-pointer group"
+                onClick={() => handleCardClick(idx, project)}
               >
-                {/* 1. Spine / Header Row */}
-                <div className="h-[46px] min-h-[46px] border-b bg-slate-50/50 flex items-center justify-between px-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-mono text-slate-400 font-bold tracking-wide">
-                      SHEET {project.id}
-                    </span>
-                    <span className="w-1.5 h-1.5 bg-indigo-600 rounded-none animate-pulse" />
-                    <h3 className="text-xs font-serif font-bold text-slate-800 tracking-tight line-clamp-1">
-                      {project.title}
-                    </h3>
-                  </div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[9px] font-mono text-slate-400 font-medium">
-                      {project.date}
-                    </span>
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-                  </div>
-                </div>
- 
-                {/* 2. Content Block */}
-                <div className="p-5 flex flex-col justify-between space-y-5">
-                  <div>
-                    {/* Issue & Price Header */}
-                    <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 tracking-wider">
-                      <span>{project.issue}</span>
-                      <span>{project.price}</span>
+                {/* Paper Texture Overlay */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-50/10 via-transparent to-transparent pointer-events-none" />
+
+                {/* 1. Spine / Header Row (Always Visible - 48px high on desktop, 40px on mobile to look like a thin paper edge) */}
+                <motion.div
+                  style={{
+                    borderColor: transforms.headerBorderColor,
+                    backgroundColor: transforms.headerBgColor,
+                  }}
+                  className="h-[38px] sm:h-[46px] min-h-[38px] sm:min-h-[46px] border-b select-none overflow-hidden relative z-10"
+                >
+                  <motion.div
+                    style={{ opacity: transforms.headerOpacity }}
+                    className="h-full w-full flex items-center justify-between px-3 sm:px-6"
+                  >
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold tracking-wide">
+                        SHEET {project.id}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-slate-300" />
+                      <h3 className="text-[11px] sm:text-sm font-serif font-bold text-slate-800 tracking-tight line-clamp-1 transition-transform duration-500 ease-out group-hover:scale-[1.03] origin-left">
+                        {project.title}
+                      </h3>
                     </div>
                     
-                    {/* Subtitle */}
-                    <div className="border-y border-dashed border-slate-200 py-1.5 text-[10px] font-mono text-slate-500 italic my-2 leading-relaxed">
-                      {project.subtitle}
-                    </div>
- 
-                    {/* Editorial Body Text */}
-                    <p className="text-slate-600 text-xs leading-relaxed font-serif text-justify line-clamp-5">
-                      {project.editorial}
-                    </p>
-                  </div>
- 
-                  {/* Technical Video/Image Frame */}
-                  <div className="bg-[#fcfbf9] border border-slate-200 rounded-[4px] p-1.5 shadow-sm">
-                    <div className="aspect-[16/10] bg-slate-900 rounded-[2px] overflow-hidden relative border border-slate-200">
-                      {project.bgVideo ? (
-                        <video
-                          src={project.bgVideo}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          preload="metadata"
-                          className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98]"
-                        />
-                      ) : (
-                        <img 
-                          src={project.naturalImage} 
-                          alt={project.title} 
-                          className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98]"
-                        />
-                      )}
-                    </div>
-                  </div>
- 
-                  {/* Tech Badges */}
-                  <div className="flex flex-wrap gap-1.5 pt-1 border-t border-slate-100">
-                    {project.tech.map((tech) => (
-                      <span 
-                        key={tech} 
-                        className="text-[9px] font-mono font-semibold px-2 py-0.5 bg-slate-50 text-slate-600 border border-slate-200/80 rounded-none"
-                      >
-                        {tech}
+                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                      <span className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-medium hidden sm:inline">
+                        {project.date}
                       </span>
-                    ))}
-                  </div>
- 
-                  {/* Mobile Footer Action */}
-                  <div className="flex items-center justify-between text-[10px] font-mono text-indigo-600 font-bold border-t border-slate-100 pt-3 shrink-0">
-                    <span className="flex items-center gap-1.5">
-                      <BookOpen className="w-4 h-4" /> Open Detailed Dossier
-                    </span>
-                    <span className="flex items-center gap-1">
-                      Codebase <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        /* Sticky Viewport Container */
-        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-16 overflow-hidden">
-          
-          {/* Section Heading */}
-          <div className="text-center z-20 px-4 shrink-0 mb-8 sm:mb-12">
-            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
-              Archive Sheets
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight font-serif">
-              The Project Gazette
-            </h2>
-            <p className="text-slate-500 mt-2 max-w-md mx-auto text-xs sm:text-sm leading-relaxed">
-              Scroll to expand each page in the vertical paper pile. Click any active sheet to view the full dossier.
-            </p>
-          </div>
-
-          {/* Progress Track and Stack Deck Wrapper */}
-          <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[660px]">
-            
-            {/* Scroll Progress Timeline Track (Left Side) */}
-            <div className="relative w-0.5 bg-slate-200/80 hidden lg:block h-[450px] shrink-0 z-20">
-              <motion.div 
-                className="w-full bg-indigo-500 origin-top h-full" 
-                style={{ scaleY: scrollYProgress }} 
-              />
-              <div className="absolute top-0 -left-1.5 w-3.5 h-3.5 rounded-full bg-slate-200 border-2 border-white" />
-              <div className="absolute bottom-0 -left-1.5 w-3.5 h-3.5 rounded-full bg-indigo-500 border-2 border-white" />
-            </div>
-
-            {/* Vertical Stack Deck - Styled like a 3D desk space */}
-            <div 
-              className="flex-1 relative h-full select-none"
-              style={{ 
-                perspective: "1800px", 
-                transformStyle: "preserve-3d" 
-              }}
-            >
-            {projectsList.map((project, idx) => {
-              const transforms = motionTransforms[idx]
-
-              return (
-                <motion.div
-                  key={project.id}
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    right: 0,
-                    width: "100%",
-                    height: transforms.height,
-                    rotateX: transforms.rotateX,
-                    x: transforms.x,
-                    y: transforms.y,
-                    z: transforms.z,
-                    zIndex: transforms.zIndex,
-                    boxShadow: transforms.shadow,
-                    transformStyle: "preserve-3d",
-                  }}
-                  className="bg-white border border-slate-200/90 rounded-[6px] transition-shadow relative overflow-hidden flex flex-col justify-between cursor-pointer group"
-                  onClick={() => handleCardClick(idx, project)}
-                >
-                  {/* Paper Texture Overlay */}
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-50/10 via-transparent to-transparent pointer-events-none" />
-
-                  {/* 1. Spine / Header Row (Always Visible - 48px high to look like a thin paper edge) */}
-                  <motion.div
-                    style={{
-                      borderColor: transforms.headerBorderColor,
-                      backgroundColor: transforms.headerBgColor,
-                    }}
-                    className="h-[46px] min-h-[46px] border-b select-none overflow-hidden relative z-10"
-                  >
-                    <motion.div
-                      style={{ opacity: transforms.headerOpacity }}
-                      className="h-full w-full flex items-center justify-between px-4 sm:px-6"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="text-[9px] font-mono text-slate-400 font-bold tracking-wide">
-                          SHEET {project.id}
-                        </span>
-                        <span className="w-1 h-1 rounded-full bg-slate-300" />
-                        <h3 className="text-xs sm:text-sm font-serif font-bold text-slate-800 tracking-tight line-clamp-1 transition-transform duration-500 ease-out group-hover:scale-[1.03] origin-left">
-                          {project.title}
-                        </h3>
-                      </div>
-                      
-                      <div className="flex items-center gap-3 shrink-0">
-                        <span className="text-[9px] font-mono text-slate-400 font-medium hidden sm:inline">
-                          {project.date}
-                        </span>
-                        <motion.div style={{ rotate: transforms.rotateChevron }} className="text-slate-400">
-                          <ChevronDown className="w-3.5 h-3.5" />
-                        </motion.div>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-
-                  {/* 2. Expanded Content Block (Fades in/out) */}
-                  <motion.div
-                    style={{
-                      opacity: transforms.opacity,
-                    }}
-                    className="flex-1 flex flex-col justify-between p-4 sm:p-6 pt-2 sm:pt-3 overflow-hidden relative z-10"
-                  >
-                    <div className="flex-1 grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-stretch overflow-hidden">
-                      
-                      {/* Left Column: Editorial Content */}
-                      <div className="sm:col-span-6 flex flex-col justify-between overflow-hidden relative z-10 py-1 transition-transform duration-500 ease-out group-hover:scale-[1.04] origin-left">
-                        <div>
-                          {/* Issue & Price Header */}
-                          <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 tracking-wider mb-1 sm:mb-2">
-                            <span>{project.issue}</span>
-                            <span>{project.price}</span>
-                          </div>
-                          
-                          {/* Subtitle */}
-                          <div className="border-y border-dashed border-slate-200 py-1 text-[10px] sm:text-xs font-mono text-slate-500 italic mb-2 sm:mb-3">
-                            {project.subtitle}
-                          </div>
-   
-                          {/* Editorial Body Text */}
-                          <p className="text-slate-600 text-[11px] sm:text-xs leading-relaxed font-serif text-justify overflow-hidden line-clamp-3 sm:line-clamp-8 mb-3">
-                            {project.editorial}
-                          </p>
-                        </div>
-   
-                        {/* Footer Actions */}
-                        <div className="hidden sm:flex items-center justify-between text-[9px] sm:text-[10px] font-mono text-indigo-600 font-bold border-t border-slate-100 pt-2 shrink-0">
-                          <span className="flex items-center gap-1">
-                            <BookOpen className="w-3.5 h-3.5" /> Open Detailed Dossier
-                          </span>
-                          <span className="flex items-center gap-1">
-                            View Codebase <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Right Column: Technical Video/Image Frame Box & Tech Badges */}
-                      <div className="sm:col-span-6 flex flex-col justify-between overflow-hidden relative z-10">
-                        {/* Technical Video/Image Frame */}
-                        <div className="flex-1 flex flex-col justify-center mb-3 sm:mb-4">
-                          <div className="bg-[#fcfbf9] border border-slate-300 rounded-[4px] p-1.5 shadow-[0_4px_12px_rgba(15,23,42,0.06)] transition-transform duration-500 group-hover:scale-[1.02]">
-                            <div className="aspect-[16/10] bg-slate-900 rounded-[2px] overflow-hidden relative border border-slate-200">
-                              {project.bgVideo ? (
-                                <video
-                                  src={project.bgVideo}
-                                  autoPlay
-                                  loop
-                                  muted
-                                  playsInline
-                                  className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98]"
-                                />
-                              ) : (
-                                <img 
-                                  src={project.naturalImage} 
-                                  alt={project.title} 
-                                  className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98]"
-                                />
-                              )}
-                            </div>
-                          </div>
-                          {/* Caption under the frame */}
-                          <div className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold tracking-wider text-center mt-2 uppercase">
-                            {project.caption}
-                          </div>
-                        </div>
-
-                        {/* Tech Badges */}
-                        <div className="flex flex-wrap gap-1 justify-start sm:justify-end shrink-0">
-                          {project.tech.slice(0, 4).map((tech) => (
-                            <span 
-                              key={tech} 
-                              className="text-[8px] sm:text-[9px] font-mono font-semibold px-1.5 py-0.5 bg-slate-50 text-slate-600 border border-slate-200/80 rounded"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                          {project.tech.length > 4 && (
-                            <span className="text-[8px] font-mono text-slate-500 pt-0.5 bg-slate-50 px-1.5 rounded">
-                              +{project.tech.length - 4} more
-                            </span>
-                          )}
-                        </div>
-                      </div>
+                      <motion.div style={{ rotate: transforms.rotateChevron }} className="text-slate-400">
+                        <ChevronDown className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                      </motion.div>
                     </div>
                   </motion.div>
                 </motion.div>
-              )
-            })}
+
+                {/* 2. Expanded Content Block (Fades in/out) */}
+                <motion.div
+                  style={{
+                    opacity: transforms.opacity,
+                  }}
+                  className="flex-1 flex flex-col justify-between p-3 sm:p-6 pt-2 sm:pt-3 overflow-hidden relative z-10"
+                >
+                  <div className="flex-1 grid grid-cols-12 gap-3 sm:gap-6 items-stretch overflow-hidden">
+                    
+                    {/* Left Column: Editorial Content */}
+                    <div className="col-span-12 sm:col-span-6 flex flex-col justify-between overflow-hidden relative z-10 py-1 transition-transform duration-500 ease-out group-hover:scale-[1.04] origin-left">
+                      <div>
+                        {/* Issue & Price Header */}
+                        <div className="flex justify-between items-center text-[8px] sm:text-[9px] font-mono text-slate-400 tracking-wider mb-1">
+                          <span>{project.issue}</span>
+                          <span>{project.price}</span>
+                        </div>
+                        
+                        {/* Subtitle */}
+                        <div className="border-y border-dashed border-slate-200 py-1 text-[9px] sm:text-xs font-mono text-slate-500 italic mb-2">
+                          {project.subtitle}
+                        </div>
+ 
+                        {/* Editorial Body Text */}
+                        <p className="text-slate-600 text-[10px] sm:text-xs leading-relaxed font-serif text-justify overflow-hidden line-clamp-4 sm:line-clamp-8 mb-2 sm:mb-3">
+                          {project.editorial}
+                        </p>
+                      </div>
+
+                      {/* Mobile-only Tech Badges (shown only on mobile) */}
+                      <div className="flex flex-wrap gap-1 mt-1 sm:hidden shrink-0">
+                        {project.tech.slice(0, 5).map((tech) => (
+                          <span 
+                            key={tech} 
+                            className="text-[8px] font-mono font-semibold px-1.5 py-0.5 bg-slate-50 text-slate-600 border border-slate-200/80 rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.tech.length > 5 && (
+                          <span className="text-[8px] font-mono text-slate-500 pt-0.5 bg-slate-50 px-1.5 rounded">
+                            +{project.tech.length - 5} more
+                          </span>
+                        )}
+                      </div>
+ 
+                      {/* Footer Actions */}
+                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono text-indigo-600 font-bold border-t border-slate-100 pt-2 shrink-0 mt-2 sm:mt-0">
+                        <span className="flex items-center gap-1">
+                          <BookOpen className="w-3.5 h-3.5" /> Open Dossier
+                        </span>
+                        <span className="flex items-center gap-1">
+                          Codebase <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Technical Video/Image Frame Box & Tech Badges (hidden on mobile) */}
+                    <div className="hidden sm:flex sm:col-span-6 flex-col justify-between overflow-hidden relative z-10">
+                      {/* Technical Video/Image Frame */}
+                      <div className="flex-1 flex flex-col justify-center mb-3 sm:mb-4">
+                        <div className="bg-[#fcfbf9] border border-slate-300 rounded-[4px] p-1.5 shadow-[0_4px_12px_rgba(15,23,42,0.06)] transition-transform duration-500 group-hover:scale-[1.02]">
+                          <div className="aspect-[16/10] bg-slate-900 rounded-[2px] overflow-hidden relative border border-slate-200">
+                            {project.bgVideo ? (
+                              <video
+                                src={project.bgVideo}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98]"
+                              />
+                            ) : (
+                              <img 
+                                src={project.naturalImage} 
+                                alt={project.title} 
+                                className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98]"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        {/* Caption under the frame */}
+                        <div className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold tracking-wider text-center mt-2 uppercase">
+                          {project.caption}
+                        </div>
+                      </div>
+
+                      {/* Tech Badges */}
+                      <div className="flex flex-wrap gap-1 justify-start sm:justify-end shrink-0">
+                        {project.tech.slice(0, 4).map((tech) => (
+                          <span 
+                            key={tech} 
+                            className="text-[8px] sm:text-[9px] font-mono font-semibold px-1.5 py-0.5 bg-slate-50 text-slate-600 border border-slate-200/80 rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.tech.length > 4 && (
+                          <span className="text-[8px] font-mono text-slate-500 pt-0.5 bg-slate-50 px-1.5 rounded">
+                            +{project.tech.length - 4} more
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )
+          })}
             </div>
           </div>
         </div>
-      )}
 
       {/* Detailed Modal (The Open Newspaper Dossier) */}
       <AnimatePresence>
