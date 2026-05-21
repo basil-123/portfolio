@@ -302,7 +302,7 @@ export default function Projects() {
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-9 sm:pt-20 overflow-hidden">
         
         {/* Section Heading */}
-        <div className="text-center z-20 px-4 shrink-0 mb-4 sm:mb-6">
+        <div className="text-center z-20 px-4 shrink-0 mb-3 sm:mb-6">
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
             Archive Sheets
           </span>
