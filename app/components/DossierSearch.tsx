@@ -126,52 +126,70 @@ export default function DossierSearch() {
   const [hasSearched, setHasSearched] = useState(false);
   
   const consoleEndRef = useRef<HTMLDivElement>(null);
-  const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const typingTimerRef = useRef<any>(null);
+  const logTimerRef = useRef<any>(null);
+  const isMountedRef = useRef<boolean>(true);
 
-  // Auto scroll terminal logs
+  // Auto scroll terminal logs with safety check
   useEffect(() => {
-    if (consoleEndRef.current) {
-      consoleEndRef.current.scrollIntoView({ behavior: "smooth" });
+    try {
+      if (consoleEndRef.current && typeof consoleEndRef.current.scrollIntoView === "function") {
+        consoleEndRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } catch (e) {
+      console.warn("Autoscroll error:", e);
     }
   }, [logs]);
 
-  // Clean up typing effect on unmount
+  // Clean up timers on unmount and track mount status
   useEffect(() => {
+    isMountedRef.current = true;
     return () => {
-      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+      isMountedRef.current = false;
+      if (typingTimerRef.current) clearInterval(typingTimerRef.current);
+      if (logTimerRef.current) clearInterval(logTimerRef.current);
     };
   }, []);
 
   const handleCitationClick = (citation: CorpusItem["citation"]) => {
-    if (!citation) return;
+    if (!citation || !citation.action) return;
     
-    if (citation.action === "download-cv") {
-      const link = document.createElement("a");
-      link.href = "/Basil_CV.pdf";
-      link.download = "Basil_Varghesekutty_CV.pdf";
-      link.click();
-    } else if (citation.action === "scroll-skills") {
-      document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
-    } else if (citation.action.startsWith("scroll-projects")) {
-      const projSection = document.getElementById("projects");
-      if (projSection) {
-        projSection.scrollIntoView({ behavior: "smooth" });
-        
-        // If specific project requested, let's trigger scroll positioning via window events or timeouts
-        let index = 0;
-        if (citation.action.endsWith("cctv")) index = 0;
-        else if (citation.action.endsWith("bi")) index = 1;
-        else if (citation.action.endsWith("rag")) index = 2;
-        else if (citation.action.endsWith("chat")) index = 3;
-        
-        // Wait briefly for scroll to projects section, then find card click targets
-        setTimeout(() => {
-          const cards = projSection.querySelectorAll(".group");
-          if (cards && cards[index]) {
-            (cards[index] as HTMLElement).click();
-          }
-        }, 800);
+    try {
+      if (citation.action === "download-cv") {
+        const link = document.createElement("a");
+        link.href = "/Basil_CV.pdf";
+        link.download = "Basil_Varghesekutty_CV.pdf";
+        link.click();
+      } else if (citation.action === "scroll-skills") {
+        document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+      } else if (citation.action.startsWith("scroll-projects")) {
+        const projSection = document.getElementById("projects");
+        if (projSection) {
+          projSection.scrollIntoView({ behavior: "smooth" });
+          
+          let index = 0;
+          if (citation.action.endsWith("cctv")) index = 0;
+          else if (citation.action.endsWith("bi")) index = 1;
+          else if (citation.action.endsWith("rag")) index = 2;
+          else if (citation.action.endsWith("chat")) index = 3;
+          
+          setTimeout(() => {
+            try {
+              const cards = projSection.querySelectorAll(".group");
+              if (cards && cards[index]) {
+                const cardEl = cards[index] as HTMLElement;
+                if (cardEl && typeof cardEl.click === "function") {
+                  cardEl.click();
+                }
+              }
+            } catch (err) {
+              console.error("Citation transition click error:", err);
+            }
+          }, 800);
+        }
       }
+    } catch (err) {
+      console.error("Citation transition main error:", err);
     }
   };
 
@@ -186,25 +204,20 @@ export default function DossierSearch() {
     setActiveCitation(undefined);
 
     const cleanQuery = searchQuery.toLowerCase().trim();
-    
-    // 1. Tokenize query
     const queryTokens = cleanQuery.split(/\s+/).filter(t => t.length > 1);
 
-    // 2. Score corpus items
     let bestMatch: CorpusItem | null = null;
     let bestScore = 0;
 
     for (const item of dossierCorpus) {
       let score = 0;
       
-      // Keyword exact matching
       for (const keyword of item.keywords) {
         if (cleanQuery.includes(keyword)) {
           score += 15;
         }
       }
 
-      // Token overlap matching
       for (const token of queryTokens) {
         for (const keyword of item.keywords) {
           if (keyword.includes(token)) {
@@ -224,30 +237,47 @@ export default function DossierSearch() {
 
     const similarity = bestScore > 0 ? Math.min(0.98, 0.4 + (bestScore / 50)) : 0;
     
-    // Simulate RAG pipeline step-by-step logs
     const logSteps = [
       `[INFO] Initializing Retrieval-Augmented Generation (RAG) query execution...`,
       `[EMBEDDING] Vectorizing input: "${searchQuery}" using lightweight sentence-transformers...`,
       `[INDEX] Query vector computed. Scanning local SQLite & ChromaDB registry index...`,
       bestScore >= 5 && bestMatch
-        ? `[MATCH] Document chunk matched: [Node ID: ${bestMatch.id}] with cosine similarity: ${similarity.toFixed(2)}`
+        ? `[MATCH] Document chunk matched: [Node ID: ${bestMatch?.id || "N/A"}] with cosine similarity: ${similarity.toFixed(2)}`
         : `[WARNING] Cosine similarity falls below threshold (best score: ${bestScore}). Reverting to fallback prompt...`,
       bestScore >= 5 && bestMatch
-        ? `[CONTEXT] Chunk retrieved: "${bestMatch.context}"`
+        ? `[CONTEXT] Chunk retrieved: "${bestMatch?.context || ""}"`
         : `[CONTEXT] No matching dossier entries. Compiling default directory listings.`,
       `[LLM] Decrypting retrieved context & generating grounded response...`,
       `[LLM] Response synthesized successfully. Initializing stream readout.`
     ];
 
+    if (logTimerRef.current) {
+      clearInterval(logTimerRef.current);
+    }
+    if (typingTimerRef.current) {
+      clearInterval(typingTimerRef.current);
+      typingTimerRef.current = null;
+    }
+
     let currentLogIndex = 0;
-    const interval = setInterval(() => {
+    const intervalId = setInterval(() => {
+      if (!isMountedRef.current) {
+        clearInterval(intervalId);
+        return;
+      }
+
       if (currentLogIndex < logSteps.length) {
-        setLogs(prev => [...prev, logSteps[currentLogIndex]]);
+        const nextLog = logSteps[currentLogIndex];
+        if (nextLog) {
+          setLogs(prev => [...prev, nextLog]);
+        }
         currentLogIndex++;
       } else {
-        clearInterval(interval);
+        clearInterval(intervalId);
+        if (logTimerRef.current === intervalId) {
+          logTimerRef.current = null;
+        }
         
-        // Set actual answer content
         let finalAnswer = "";
         let citation: CorpusItem["citation"] | undefined = undefined;
 
@@ -258,28 +288,43 @@ export default function DossierSearch() {
           finalAnswer = "I couldn't find a precise match for that query in Basil's active dossier registry. Try searching for topics like 'projects', 'skills', 'location', 'cv', 'attendance detection', 'bi agent', or 'rag assistant'.";
         }
 
-        setAnswer(finalAnswer);
-        setActiveCitation(citation);
-        setIsProcessing(false);
-        triggerTypewriter(finalAnswer);
+        if (isMountedRef.current) {
+          setAnswer(finalAnswer);
+          setActiveCitation(citation);
+          setIsProcessing(false);
+          triggerTypewriter(finalAnswer);
+        }
       }
     }, 180);
+    logTimerRef.current = intervalId;
   };
 
   const triggerTypewriter = (text: string) => {
+    if (!text) return;
     let index = 0;
     setDisplayedAnswer("");
     
-    if (typingTimerRef.current) clearInterval(typingTimerRef.current);
+    if (typingTimerRef.current) {
+      clearInterval(typingTimerRef.current);
+    }
     
-    typingTimerRef.current = setInterval(() => {
+    const timerId = setInterval(() => {
+      if (!isMountedRef.current) {
+        clearInterval(timerId);
+        return;
+      }
+
       if (index < text.length) {
         setDisplayedAnswer(prev => prev + text.charAt(index));
         index++;
       } else {
-        if (typingTimerRef.current) clearInterval(typingTimerRef.current);
+        clearInterval(timerId);
+        if (typingTimerRef.current === timerId) {
+          typingTimerRef.current = null;
+        }
       }
     }, 12);
+    typingTimerRef.current = timerId;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -362,7 +407,7 @@ export default function DossierSearch() {
         {hasSearched && (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
             
-            {/* Left Screen: Pipeline Logs (7 cols) */}
+            {/* Left Screen: Pipeline Logs (6 cols) */}
             <div className="md:col-span-6 flex flex-col justify-between border border-slate-300 rounded-lg overflow-hidden bg-slate-950 shadow-md">
               <div className="bg-slate-900 px-3 py-1.5 border-b border-slate-800 flex items-center justify-between">
                 <span className="font-mono text-[9px] text-slate-400 font-bold uppercase flex items-center gap-1.5">
@@ -372,6 +417,7 @@ export default function DossierSearch() {
               </div>
               <div className="p-3 font-mono text-[10px] leading-relaxed text-slate-300 flex-1 overflow-y-auto h-40 max-h-40 min-h-40 scrollbar-thin">
                 {logs.map((log, index) => {
+                  if (typeof log !== "string") return null;
                   let colorClass = "text-slate-400";
                   if (log.startsWith("[INFO]")) colorClass = "text-blue-400";
                   else if (log.startsWith("[EMBEDDING]")) colorClass = "text-purple-400";
@@ -399,7 +445,7 @@ export default function DossierSearch() {
               </div>
             </div>
 
-            {/* Right Screen: Typewriter Answer (5 cols) */}
+            {/* Right Screen: Typewriter Answer (6 cols) */}
             <div className="md:col-span-6 border border-slate-300 rounded-lg p-4 bg-white flex flex-col justify-between shadow-sm min-h-40 md:min-h-0">
               <div>
                 <div className="flex items-center gap-1.5 text-[9px] font-mono text-slate-400 font-bold uppercase mb-2">

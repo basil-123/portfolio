@@ -309,12 +309,7 @@ export default function Projects() {
           <h2 className="text-2xl sm:text-5xl font-extrabold text-slate-900 mt-1 tracking-tight font-serif">
             The Project Gazette
           </h2>
-          <p className="text-slate-500 mt-1 max-w-md mx-auto text-[11px] sm:text-sm leading-relaxed px-4">
-            {isMobile 
-              ? "Scroll to stack/unstack each sheet in the pile. Tap any sheet to view its full dossier."
-              : "Scroll to expand each page in the vertical paper pile. Click any active sheet to view the full dossier."
-            }
-          </p>
+
         </div>
 
         {/* Progress Track and Stack Deck Wrapper */}
@@ -531,6 +526,16 @@ export default function Projects() {
             )
           })}
             </div>
+          </div>
+
+          {/* Helper Instructions at the bottom of the stack */}
+          <div className="text-center z-20 px-4 mt-2 sm:mt-4 max-w-md mx-auto shrink-0">
+            <p className="text-slate-500 text-[10px] sm:text-xs font-serif italic leading-relaxed px-4">
+              {isMobile 
+                ? "Scroll to stack/unstack each sheet in the pile. Tap any sheet to view its full dossier."
+                : "Scroll to expand each page in the vertical paper pile. Click any active sheet to view the full dossier."
+              }
+            </p>
           </div>
         </div>
 

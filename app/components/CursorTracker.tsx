@@ -35,14 +35,14 @@ export default function CursorTracker() {
 
       // Check if hovering over clickable items
       const target = e.target as HTMLElement | null;
-      if (target) {
+      if (target && typeof target.closest === "function") {
         const isClickable =
           target.tagName === "BUTTON" ||
           target.tagName === "A" ||
           target.closest("button") ||
           target.closest("a") ||
           target.closest(".cursor-pointer") ||
-          target.getAttribute("role") === "button" ||
+          (typeof target.getAttribute === "function" && target.getAttribute("role") === "button") ||
           target.closest("[onClick]");
         setIsHovered(!!isClickable);
       }
