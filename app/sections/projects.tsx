@@ -531,9 +531,7 @@ export default function Projects() {
           {/* Helper Instructions at the bottom of the stack */}
           <div className="text-center z-20 px-4 mt-2 sm:mt-4 max-w-md mx-auto shrink-0">
             <p className="text-slate-500 text-[10px] sm:text-xs font-serif italic leading-relaxed px-4">
-              {isMobile 
-                ? "Scroll to stack/unstack each sheet in the pile. Tap any sheet to view its full dossier."
-                : "Scroll to expand each page in the vertical paper pile. Click any active sheet to view the full dossier."
+              {isMobile
               }
             </p>
           </div>
