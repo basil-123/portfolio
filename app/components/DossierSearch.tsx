@@ -17,6 +17,97 @@ interface CorpusItem {
 
 const dossierCorpus: CorpusItem[] = [
   {
+    id: "summary",
+    keywords: ["summary", "profile", "about", "bio", "background", "who is", "resume", "cv", "description", "professional"],
+    context: "Professional summary: AI-focused Computer Science graduate with hands-on experience building machine learning, RAG, and computer vision systems. B.Tech from GEC Idukki.",
+    answer: "AI-focused Computer Science graduate with hands-on experience building real-world machine learning and AI-powered applications. Developed RAG systems, computer vision solutions, and full-stack tools integrating LLM APIs and backend services. Comfortable working across Python, REST APIs, and modern AI tooling to turn ideas into functional products. Looking to contribute to fast-moving teams building scalable AI features and intelligent automation systems.",
+    category: "about"
+  },
+  {
+    id: "dob",
+    keywords: ["birth", "born", "dob", "date of birth", "age", "birthday", "year", "date", "22/02/2003"],
+    context: "Date of Birth: 22/02/2003 (February 22, 2003).",
+    answer: "Basil Varghesekutty's date of birth is February 22, 2003 (22/02/2003).",
+    category: "about"
+  },
+  {
+    id: "tenth-education",
+    keywords: ["tenth", "10th", "santom", "cbse", "public school", "high school", "santom public school", "tenth mark", "10th mark"],
+    context: "Tenth (10th) mark: 90.2% under CBSE at Santom Public School.",
+    answer: "Basil completed his 10th grade under CBSE at Santom Public School scoring 90.2%.",
+    category: "about"
+  },
+  {
+    id: "twelfth-education",
+    keywords: ["12th", "twelfth", "mgm", "higher secondary", "mgm higher secondary school", "12th mark", "twelfth mark"],
+    context: "Twelfth (12th) mark: 96% at MGM Higher Secondary School.",
+    answer: "Basil completed his 12th grade at MGM Higher Secondary School with a score of 96%.",
+    category: "about"
+  },
+  {
+    id: "education",
+    keywords: ["education", "school", "college", "degree", "btech", "b.tech", "gec", "idukki", "engineering", "marks", "percentage", "grade", "score", "qualification", "university"],
+    context: "Education: B.Tech in Computer Science (2021-2025) from GEC Idukki. 10th mark 90.2% under CBSE at Santom Public School. 12th mark 96% at MGM Higher Secondary School.",
+    answer: "Basil graduated with a B.Tech in Computer Science from Government Engineering College Idukki (2021 - 2025). Prior to his college degree, he completed his 10th grade under CBSE at Santom Public School scoring 90.2%, and finished his 12th grade at MGM Higher Secondary School with a score of 96%.",
+    category: "about"
+  },
+  {
+    id: "hobbies",
+    keywords: ["hobbies", "hobby", "interest", "free time", "movies", "youtube", "science videos", "watch", "leisure"],
+    context: "Hobbies: Watching movies and YouTube science videos.",
+    answer: "Basil's hobbies include watching movies and watching YouTube science videos.",
+    category: "about"
+  },
+  {
+    id: "height",
+    keywords: ["height", "tall", "how tall", "cm", "physical", "186"],
+    context: "Height: 186 cm.",
+    answer: "Basil Varghesekutty is 186 cm tall.",
+    category: "about"
+  },
+  {
+    id: "blood",
+    keywords: ["blood", "group", "type", "o positive", "o+"],
+    context: "Blood Group: O positive (O+).",
+    answer: "Basil's blood group is O positive (O+).",
+    category: "about"
+  },
+  {
+    id: "proj-booking",
+    keywords: ["train booking", "railway", "ticket", "admin panel", "train booking project", "train booking admin panel"],
+    context: "Project: Admin Panel for Train Booking. Tech: C, Python, MySQL.",
+    answer: "Basil developed an Admin Panel for Train Booking to view, update, and manage ticket bookings, customer details, and train statuses.",
+    category: "projects"
+  },
+  {
+    id: "proj-edupulse",
+    keywords: ["edu-pulse", "edupulse", "hub", "student sharing", "academic sharing", "collegiate", "pulse"],
+    context: "Project: Edu-Pulse Hub sharing platform.",
+    answer: "Basil designed and developed 'Edu-Pulse Hub', a web-based collegiate sharing platform that allows students to share academic activities, learning materials, and interact.",
+    category: "projects"
+  },
+  {
+    id: "certifications",
+    keywords: ["certifications", "training", "awards", "certification", "scholarship", "nptel", "smec", "smeclabs"],
+    context: "Training & Certifications: SMECLabs Kochi Data Science & AI Program (Sep 2025 - Mar 2026). IITM Pravartak Project Scholarship (Jan 2025 - Jan 2026). NPTEL Machine Learning Certification (Silver Elite). Professional Certification in Data Science with AI ML.",
+    answer: "Basil holds a Professional Certification in Data Science with AI/ML, completed a Data Science & AI program at SMECLabs Kochi (Sep 2025 - Mar 2026), and earned a Silver Elite NPTEL Certification in Machine Learning (2024). Additionally, he was awarded a one-year funding grant by IITM Pravartak Technologies to support technical project development (Jan 2025 - Jan 2026).",
+    category: "about"
+  },
+  {
+    id: "leadership",
+    keywords: ["leadership", "extracurricular", "ieee", "coordinator", "secretary", "arts", "hackathon", "organize"],
+    context: "Leadership & Extracurriculars: Technical Coordinator of IEEE PES (2022-2023). Arts Club Secretary (2023-2025).",
+    answer: "Basil has active leadership experience, having served as the Technical Coordinator for IEEE PES (2022 - 2023) where he organized student hackathons and technical events, and as the Arts Club Secretary (2023 - 2025) managing event logistics and scheduling for major functions.",
+    category: "about"
+  },
+  {
+    id: "contact-info",
+    keywords: ["contact", "email", "phone", "number", "linkedin", "portfolio", "social", "mail", "github"],
+    context: "Contact details: Email: basilvarghese012@gmail.com. Phone: +91-9562731781. LinkedIn: linkedin.com/in/basilvarghesekutty. Github: basil-123.",
+    answer: "You can contact Basil via email at basilvarghese012@gmail.com or by phone at +91-9562731781. You can also view his professional networks on LinkedIn (linkedin.com/in/basilvarghesekutty/) or GitHub (github.com/basil-123).",
+    category: "about"
+  },
+  {
     id: "loc",
     keywords: ["location", "where", "base", "live", "kerala", "india", "place", "city"],
     context: "Location: Kerala, India. Working locally and open to remote collaboration globally.",
@@ -111,9 +202,9 @@ const dossierCorpus: CorpusItem[] = [
 
 const presetQuestions = [
   "Where is Basil based?",
-  "What skills does he use for Deep Learning?",
+  "What is his academic background?",
   "Tell me about the CCTV Violence Detection project",
-  "How does his BI AI Agent work?"
+  "What are his hobbies?"
 ];
 
 export default function DossierSearch() {
@@ -125,19 +216,15 @@ export default function DossierSearch() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   
-  const consoleEndRef = useRef<HTMLDivElement>(null);
+  const consoleContainerRef = useRef<HTMLDivElement>(null);
   const typingTimerRef = useRef<any>(null);
   const logTimerRef = useRef<any>(null);
   const isMountedRef = useRef<boolean>(true);
 
-  // Auto scroll terminal logs with safety check
+  // Auto scroll terminal logs within its container, avoiding page scroll
   useEffect(() => {
-    try {
-      if (consoleEndRef.current && typeof consoleEndRef.current.scrollIntoView === "function") {
-        consoleEndRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-    } catch (e) {
-      console.warn("Autoscroll error:", e);
+    if (consoleContainerRef.current) {
+      consoleContainerRef.current.scrollTop = consoleContainerRef.current.scrollHeight;
     }
   }, [logs]);
 
@@ -285,7 +372,7 @@ export default function DossierSearch() {
           finalAnswer = bestMatch.answer;
           citation = bestMatch.citation;
         } else {
-          finalAnswer = "I couldn't find a precise match for that query in Basil's active dossier registry. Try searching for topics like 'projects', 'skills', 'location', 'cv', 'attendance detection', 'bi agent', or 'rag assistant'.";
+          finalAnswer = "Not available";
         }
 
         if (isMountedRef.current) {
@@ -301,13 +388,16 @@ export default function DossierSearch() {
 
   const triggerTypewriter = (text: string) => {
     if (!text) return;
-    let index = 0;
-    setDisplayedAnswer("");
     
     if (typingTimerRef.current) {
       clearInterval(typingTimerRef.current);
+      typingTimerRef.current = null;
     }
     
+    let currentText = "";
+    setDisplayedAnswer("");
+    
+    let index = 0;
     const timerId = setInterval(() => {
       if (!isMountedRef.current) {
         clearInterval(timerId);
@@ -315,7 +405,8 @@ export default function DossierSearch() {
       }
 
       if (index < text.length) {
-        setDisplayedAnswer(prev => prev + text.charAt(index));
+        currentText += text.charAt(index);
+        setDisplayedAnswer(currentText);
         index++;
       } else {
         clearInterval(timerId);
@@ -415,7 +506,7 @@ export default function DossierSearch() {
                 </span>
                 <span className="w-2 h-2 rounded-full bg-indigo-500" />
               </div>
-              <div className="p-3 font-mono text-[10px] leading-relaxed text-slate-300 flex-1 overflow-y-auto h-40 max-h-40 min-h-40 scrollbar-thin">
+              <div ref={consoleContainerRef} className="p-3 font-mono text-[10px] leading-relaxed text-slate-300 flex-1 overflow-y-auto h-40 max-h-40 min-h-40 scrollbar-thin">
                 {logs.map((log, index) => {
                   if (typeof log !== "string") return null;
                   let colorClass = "text-slate-400";
@@ -441,7 +532,6 @@ export default function DossierSearch() {
                     <span>Processing query embeddings...</span>
                   </div>
                 )}
-                <div ref={consoleEndRef} />
               </div>
             </div>
 
@@ -451,7 +541,7 @@ export default function DossierSearch() {
                 <div className="flex items-center gap-1.5 text-[9px] font-mono text-slate-400 font-bold uppercase mb-2">
                   <Sparkles className="w-3.5 h-3.5 text-indigo-600" /> Synthesized Response
                 </div>
-                <p className="text-slate-700 font-serif leading-relaxed text-xs sm:text-sm text-justify relative min-h-[4rem]">
+                <p className="text-slate-700 font-serif leading-relaxed text-xs sm:text-sm text-left relative min-h-[4rem]">
                   {displayedAnswer}
                   {displayedAnswer.length > 0 && displayedAnswer.length < answer.length && (
                     <span className="inline-block w-1.5 h-3.5 bg-indigo-600 ml-1 animate-pulse" />
