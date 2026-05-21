@@ -184,17 +184,17 @@ export default function Projects() {
 
   // y: vertical positioning inside the 3D space
   const y1 = useTransform(scrollYProgress, points, isMobile
-    ? [20, 20, -30, -30, -30, -30, -30, -30]
-    : [20, 20, -40, -40, -40, -40, -40, -40])
+    ? [10, 10, -35, -35, -35, -35, -35, -35]
+    : [10, 10, -40, -40, -40, -40, -40, -40])
   const y2 = useTransform(scrollYProgress, points, isMobile
-    ? [520, 520, 20, 20, -10, -10, -10, -10]
-    : [540, 540, 20, 20, -16, -16, -16, -16])
+    ? [480, 480, 10, 10, -15, -15, -15, -15]
+    : [510, 510, 10, 10, -16, -16, -16, -16])
   const y3 = useTransform(scrollYProgress, points, isMobile
-    ? [540, 540, 520, 520, 20, 20, 10, 10]
-    : [564, 564, 564, 564, 20, 20, 8, 8])
+    ? [500, 500, 480, 480, 10, 10, 5, 5]
+    : [530, 530, 530, 530, 10, 10, 8, 8])
   const y4 = useTransform(scrollYProgress, points, isMobile
-    ? [560, 560, 540, 540, 520, 520, 20, 20]
-    : [588, 588, 588, 588, 588, 588, 20, 20])
+    ? [520, 520, 500, 500, 480, 480, 10, 10]
+    : [550, 550, 550, 550, 550, 550, 10, 10])
 
   // z: translation along Z-axis (lifts up closer to viewer when active)
   const z1 = useTransform(scrollYProgress, points, [40, 40, -30, -30, -30, -30, -30, -30])
@@ -299,17 +299,17 @@ export default function Projects() {
       className="relative z-10 bg-[#faf9f6]/40 border-t border-b border-slate-200/50 h-[300vh]"
     >
       {/* Sticky Viewport Container */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-5 sm:pt-10 overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-2 sm:pt-4 overflow-hidden">
         
         {/* Section Heading */}
-        <div className="text-center z-20 px-4 shrink-0 mb-3 sm:mb-6">
+        <div className="text-center z-20 px-4 shrink-0 mb-1.5 sm:mb-2">
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
             Archive Sheets
           </span>
-          <h2 className="text-2xl sm:text-5xl font-extrabold text-slate-900 mt-1 sm:mt-2 tracking-tight font-serif">
+          <h2 className="text-2xl sm:text-5xl font-extrabold text-slate-900 mt-1 tracking-tight font-serif">
             The Project Gazette
           </h2>
-          <p className="text-slate-500 mt-1 sm:mt-2 max-w-md mx-auto text-[11px] sm:text-sm leading-relaxed px-4">
+          <p className="text-slate-500 mt-1 max-w-md mx-auto text-[11px] sm:text-sm leading-relaxed px-4">
             {isMobile 
               ? "Scroll to stack/unstack each sheet in the pile. Tap any sheet to view its full dossier."
               : "Scroll to expand each page in the vertical paper pile. Click any active sheet to view the full dossier."
@@ -318,7 +318,7 @@ export default function Projects() {
         </div>
 
         {/* Progress Track and Stack Deck Wrapper */}
-        <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[620px] sm:h-[660px]">
+        <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[620px] sm:h-[660px] -mt-2 sm:-mt-8">
           
           {/* Scroll Progress Timeline Track (Left Side) */}
           <div className="relative w-0.5 bg-slate-200/80 hidden lg:block h-[450px] shrink-0 z-20">
