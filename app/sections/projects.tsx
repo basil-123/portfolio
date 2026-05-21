@@ -299,17 +299,17 @@ export default function Projects() {
       className="relative z-10 bg-[#faf9f6]/40 border-t border-b border-slate-200/50 h-[300vh]"
     >
       {/* Sticky Viewport Container */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-16 overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-5 sm:pt-10 overflow-hidden">
         
         {/* Section Heading */}
-        <div className="text-center z-20 px-4 shrink-0 mb-6 sm:mb-12">
+        <div className="text-center z-20 px-4 shrink-0 mb-3 sm:mb-6">
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
             Archive Sheets
           </span>
-          <h2 className="text-2xl sm:text-5xl font-extrabold text-slate-900 mt-2 sm:mt-3 tracking-tight font-serif">
+          <h2 className="text-2xl sm:text-5xl font-extrabold text-slate-900 mt-1 sm:mt-2 tracking-tight font-serif">
             The Project Gazette
           </h2>
-          <p className="text-slate-500 mt-2 max-w-md mx-auto text-[11px] sm:text-sm leading-relaxed px-4">
+          <p className="text-slate-500 mt-1 sm:mt-2 max-w-md mx-auto text-[11px] sm:text-sm leading-relaxed px-4">
             {isMobile 
               ? "Scroll to stack/unstack each sheet in the pile. Tap any sheet to view its full dossier."
               : "Scroll to expand each page in the vertical paper pile. Click any active sheet to view the full dossier."

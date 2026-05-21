@@ -96,7 +96,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="relative border border-slate-950/10 p-2 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.02)]"
+          className="relative border border-slate-950/10 p-3 sm:p-4 bg-slate-50/50 shadow-[0_4px_24px_rgba(0,0,0,0.02)]"
         >
           {/* Corner Crosshairs */}
           <div className="absolute -top-1.5 -left-1.5 text-[10px] font-mono text-slate-400 select-none pointer-events-none">+</div>
@@ -104,19 +104,19 @@ export default function Skills() {
           <div className="absolute -bottom-1.5 -left-1.5 text-[10px] font-mono text-slate-400 select-none pointer-events-none">+</div>
           <div className="absolute -bottom-1.5 -right-1.5 text-[10px] font-mono text-slate-400 select-none pointer-events-none">+</div>
 
-          {/* Unified Border Grid Container */}
+          {/* Spaced Grid Container */}
           <motion.div
             variants={gridVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-slate-200/80 gap-px grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-slate-200 overflow-hidden"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 bg-transparent"
           >
             {skillGroups.map((group) => (
               <motion.div
                 variants={cellVariants}
                 key={group.title}
-                className="bg-white p-4 sm:p-5 flex flex-col justify-between hover:bg-slate-50/50 transition-all duration-300 group/card relative overflow-hidden min-h-[160px] sm:min-h-[195px]"
+                className="bg-white p-4 sm:p-5 flex flex-col justify-between hover:bg-slate-50/50 transition-all duration-300 group/card relative overflow-hidden min-h-[160px] sm:min-h-[195px] border border-slate-200/80 rounded-[6px] shadow-sm"
               >
                 {/* Top edge active line animation on hover */}
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-indigo-600 transform scale-x-0 group-hover/card:scale-x-100 transition-transform duration-300 origin-left" />
