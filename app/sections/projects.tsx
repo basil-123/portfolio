@@ -299,10 +299,10 @@ export default function Projects() {
       className="relative z-10 bg-[#faf9f6]/40 border-t border-b border-slate-200/50 h-[300vh]"
     >
       {/* Sticky Viewport Container */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-[60px] sm:pt-[74px] overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-[45px] sm:pt-[74px] overflow-hidden">
         
         {/* Section Heading */}
-        <div className="text-center z-20 px-4 shrink-0 mb-3 sm:mb-6">
+        <div className="text-center z-20 px-4 shrink-0 mb-2 sm:mb-6">
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
             Archive Sheets
           </span>
