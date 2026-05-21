@@ -10,6 +10,7 @@ const Projects = dynamic(() => import("@/sections/projects"));
 const About = dynamic(() => import("@/sections/about"));
 const Contact = dynamic(() => import("@/sections/contact"));
 const RevealOnScroll = dynamic(() => import("@/components/RevealOnScroll"));
+const CursorTracker = dynamic(() => import("@/components/CursorTracker"), { ssr: false });
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen">
+      <CursorTracker />
       {/* Base Solid Background Layer to prevent stacking glitches with body */}
       <div className="fixed inset-0 bg-[#f8fafc] -z-20 pointer-events-none" />
 

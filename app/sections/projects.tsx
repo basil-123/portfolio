@@ -163,16 +163,16 @@ export default function Projects() {
 
   // Heights: 48px collapsed, 480px expanded (active POV is slightly upper to reveal lower pages)
   const h1 = useTransform(scrollYProgress, points, isMobile 
-    ? [380, 380, 40, 40, 40, 40, 40, 40] 
+    ? [500, 500, 40, 40, 40, 40, 40, 40] 
     : [520, 520, 48, 48, 48, 48, 48, 48])
   const h2 = useTransform(scrollYProgress, points, isMobile 
-    ? [40, 40, 380, 380, 40, 40, 40, 40] 
+    ? [40, 40, 500, 500, 40, 40, 40, 40] 
     : [48, 48, 520, 520, 48, 48, 48, 48])
   const h3 = useTransform(scrollYProgress, points, isMobile 
-    ? [40, 40, 40, 40, 380, 380, 40, 40] 
+    ? [40, 40, 40, 40, 500, 500, 40, 40] 
     : [48, 48, 48, 48, 520, 520, 48, 48])
   const h4 = useTransform(scrollYProgress, points, isMobile 
-    ? [40, 40, 40, 40, 40, 40, 380, 380] 
+    ? [40, 40, 40, 40, 40, 40, 500, 500] 
     : [48, 48, 48, 48, 48, 48, 520, 520])
 
   // rotateX: 0deg active (parallel to screen), 68deg collapsed (lying flat on desk, slightly upper POV)
@@ -187,13 +187,13 @@ export default function Projects() {
     ? [20, 20, -30, -30, -30, -30, -30, -30]
     : [20, 20, -40, -40, -40, -40, -40, -40])
   const y2 = useTransform(scrollYProgress, points, isMobile
-    ? [400, 400, 20, 20, -10, -10, -10, -10]
+    ? [520, 520, 20, 20, -10, -10, -10, -10]
     : [540, 540, 20, 20, -16, -16, -16, -16])
   const y3 = useTransform(scrollYProgress, points, isMobile
-    ? [420, 420, 420, 420, 20, 20, 10, 10]
+    ? [540, 540, 520, 520, 20, 20, 10, 10]
     : [564, 564, 564, 564, 20, 20, 8, 8])
   const y4 = useTransform(scrollYProgress, points, isMobile
-    ? [440, 440, 440, 440, 440, 440, 20, 20]
+    ? [560, 560, 540, 540, 520, 520, 20, 20]
     : [588, 588, 588, 588, 588, 588, 20, 20])
 
   // z: translation along Z-axis (lifts up closer to viewer when active)
@@ -318,7 +318,7 @@ export default function Projects() {
         </div>
 
         {/* Progress Track and Stack Deck Wrapper */}
-        <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[520px] sm:h-[660px]">
+        <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[620px] sm:h-[660px]">
           
           {/* Scroll Progress Timeline Track (Left Side) */}
           <div className="relative w-0.5 bg-slate-200/80 hidden lg:block h-[450px] shrink-0 z-20">
@@ -377,19 +377,12 @@ export default function Projects() {
                     className="h-full w-full flex items-center justify-between px-3 sm:px-6"
                   >
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <span className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold tracking-wide">
-                        SHEET {project.id}
-                      </span>
-                      <span className="w-1 h-1 rounded-full bg-slate-300" />
                       <h3 className="text-[11px] sm:text-sm font-serif font-bold text-slate-800 tracking-tight line-clamp-1 transition-transform duration-500 ease-out group-hover:scale-[1.03] origin-left">
                         {project.title}
                       </h3>
                     </div>
                     
                     <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                      <span className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-medium hidden sm:inline">
-                        {project.date}
-                      </span>
                       <motion.div style={{ rotate: transforms.rotateChevron }} className="text-slate-400">
                         <ChevronDown className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                       </motion.div>
@@ -407,40 +400,54 @@ export default function Projects() {
                   <div className="flex-1 grid grid-cols-12 gap-3 sm:gap-6 items-stretch overflow-hidden">
                     
                     {/* Left Column: Editorial Content */}
-                    <div className="col-span-12 sm:col-span-6 flex flex-col justify-between overflow-hidden relative z-10 py-1 transition-transform duration-500 ease-out group-hover:scale-[1.04] origin-left">
+                    <div className="col-span-12 lg:col-span-6 flex flex-col justify-between overflow-hidden relative z-10 py-1 transition-transform duration-500 ease-out group-hover:scale-[1.04] origin-left">
                       <div>
-                        {/* Issue & Price Header */}
-                        <div className="flex justify-between items-center text-[8px] sm:text-[9px] font-mono text-slate-400 tracking-wider mb-1">
-                          <span>{project.issue}</span>
-                          <span>{project.price}</span>
-                        </div>
-                        
                         {/* Subtitle */}
                         <div className="border-y border-dashed border-slate-200 py-1 text-[9px] sm:text-xs font-mono text-slate-500 italic mb-2">
                           {project.subtitle}
                         </div>
+
+                        {/* PC-only Vintage Gazette Stats Grid */}
+                        <div className="hidden lg:grid grid-cols-3 gap-2 border-b border-dashed border-slate-200 pb-2 mb-3 text-[10px] font-mono text-slate-500 font-bold">
+                          <div>
+                            <span className="block text-slate-400 font-extrabold uppercase text-[7px] tracking-wider">GAZETTE ISSUE</span>
+                            <span className="text-slate-700">{project.issue}</span>
+                          </div>
+                          <div>
+                            <span className="block text-slate-400 font-extrabold uppercase text-[7px] tracking-wider">RELEASE DATE</span>
+                            <span className="text-slate-700">{project.date}</span>
+                          </div>
+                          <div>
+                            <span className="block text-slate-400 font-extrabold uppercase text-[7px] tracking-wider">PRINT PRICE</span>
+                            <span className="text-slate-700">{project.price}</span>
+                          </div>
+                        </div>
  
                         {/* Editorial Body Text */}
-                        <p className="text-slate-600 text-[10px] sm:text-xs leading-relaxed font-serif text-justify overflow-hidden line-clamp-4 sm:line-clamp-8 mb-2 sm:mb-3">
+                        <p className="text-slate-600 text-[10px] sm:text-xs leading-relaxed font-serif text-justify overflow-hidden line-clamp-4 lg:line-clamp-8 mb-2 sm:mb-3">
                           {project.editorial}
                         </p>
-                      </div>
 
-                      {/* Mobile-only Tech Badges (shown only on mobile) */}
-                      <div className="flex flex-wrap gap-1 mt-1 sm:hidden shrink-0">
-                        {project.tech.slice(0, 5).map((tech) => (
-                          <span 
-                            key={tech} 
-                            className="text-[8px] font-mono font-semibold px-1.5 py-0.5 bg-slate-50 text-slate-600 border border-slate-200/80 rounded"
-                          >
-                            {tech}
+                        {/* PC-only Specs Section to fill up unused space */}
+                        <div className="hidden lg:block border-t border-slate-100 pt-3 mt-3">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase block mb-1">
+                            System Architecture Preview
                           </span>
-                        ))}
-                        {project.tech.length > 5 && (
-                          <span className="text-[8px] font-mono text-slate-500 pt-0.5 bg-slate-50 px-1.5 rounded">
-                            +{project.tech.length - 5} more
-                          </span>
-                        )}
+                          <ul className="space-y-1.5 font-serif text-[10px] text-slate-500">
+                            {project.architecture.slice(0, 4).map((item, idx) => {
+                              const [title, desc] = item.split(': ')
+                              return (
+                                <li key={idx} className="flex items-start gap-1.5 leading-relaxed">
+                                  <span className="mt-1 w-1.5 h-1.5 bg-indigo-500 rounded-full shrink-0" />
+                                  <span>
+                                    <strong className="text-slate-800 font-sans text-[8px] uppercase tracking-wider mr-1">{title}:</strong>
+                                    {desc}
+                                  </span>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </div>
                       </div>
  
                       {/* Footer Actions */}
@@ -454,21 +461,24 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    {/* Right Column: Technical Video/Image Frame Box & Tech Badges (hidden on mobile) */}
-                    <div className="hidden sm:flex sm:col-span-6 flex-col justify-between overflow-hidden relative z-10">
+                    {/* Right Column: Technical Video/Image Frame Box & Tech Badges */}
+                    <div className="col-span-12 lg:col-span-6 flex flex-col justify-between overflow-hidden relative z-10 mt-3 lg:mt-0">
                       {/* Technical Video/Image Frame */}
-                      <div className="flex-1 flex flex-col justify-center mb-3 sm:mb-4">
+                      <div className="flex flex-col justify-center mb-3 sm:mb-4 shrink-0 lg:flex-1">
                         <div className="bg-[#fcfbf9] border border-slate-300 rounded-[4px] p-1.5 shadow-[0_4px_12px_rgba(15,23,42,0.06)] transition-transform duration-500 group-hover:scale-[1.02]">
                           <div className="aspect-[16/10] bg-slate-900 rounded-[2px] overflow-hidden relative border border-slate-200">
                             {project.bgVideo ? (
                               <video
-                                src={project.bgVideo}
                                 autoPlay
                                 loop
                                 muted
                                 playsInline
+                                poster={project.naturalImage}
                                 className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98]"
-                              />
+                              >
+                                <source src={project.bgVideo} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
                             ) : (
                               <img 
                                 src={project.naturalImage} 
@@ -482,10 +492,24 @@ export default function Projects() {
                         <div className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold tracking-wider text-center mt-2 uppercase">
                           {project.caption}
                         </div>
+
+                        {/* PC-only Repo Indicators to fill up unused space */}
+                        <div className="hidden lg:flex items-center gap-2 mt-3 border-t border-slate-100 pt-3">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                            Source Repos
+                          </span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {project.relatedRepos.map((repo, rIdx) => (
+                              <span key={rIdx} className="inline-flex items-center gap-0.5 text-[9px] font-mono text-indigo-600 bg-indigo-50/50 border border-indigo-100/50 px-1.5 py-0.5 rounded">
+                                {repo.name}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
 
                       {/* Tech Badges */}
-                      <div className="flex flex-wrap gap-1 justify-start sm:justify-end shrink-0">
+                      <div className="flex flex-wrap gap-1 justify-start lg:justify-end shrink-0">
                         {project.tech.slice(0, 4).map((tech) => (
                           <span 
                             key={tech} 
@@ -538,7 +562,6 @@ export default function Projects() {
                   <span className="text-[10px] font-mono bg-slate-800 text-[#fdfcfb] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                     GAZETTE DOSSIER
                   </span>
-                  <span className="text-xs font-mono text-slate-500 font-semibold">{selectedProject.issue}</span>
                 </div>
                 
                 {/* Close button with card look */}

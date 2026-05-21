@@ -71,10 +71,10 @@ const cellVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-16 sm:py-24 relative z-10">
+    <section id="skills" className="py-12 sm:py-16 relative z-10">
       <div className="max-w-5xl mx-auto">
         {/* Title block */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 mb-10 md:mb-16 border-b border-slate-200 pb-6 md:pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 mb-8 md:mb-12 border-b border-slate-200 pb-6 md:pb-8">
           <div className="md:col-span-2">
             <span className="font-mono text-xs uppercase tracking-widest text-slate-400">
               Technical Index
@@ -116,44 +116,29 @@ export default function Skills() {
               <motion.div
                 variants={cellVariants}
                 key={group.title}
-                className="bg-white p-5 sm:p-8 flex flex-col justify-between hover:bg-slate-50/50 transition-all duration-300 group/card relative overflow-hidden min-h-[250px] sm:min-h-[300px]"
+                className="bg-white p-4 sm:p-5 flex flex-col justify-between hover:bg-slate-50/50 transition-all duration-300 group/card relative overflow-hidden min-h-[160px] sm:min-h-[195px]"
               >
                 {/* Top edge active line animation on hover */}
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-indigo-600 transform scale-x-0 group-hover/card:scale-x-100 transition-transform duration-300 origin-left" />
 
                 <div>
-                  {/* Registry Header */}
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4 select-none">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 bg-indigo-600 rounded-none" />
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                        REG-{group.code}
-                      </span>
-                    </div>
-                    <span className="font-mono text-[9px] text-slate-400 uppercase tracking-widest">
-                      {group.skills.length} units
-                    </span>
-                  </div>
-
                   {/* Title & Description */}
-                  <h3 className="font-serif text-lg font-medium text-slate-900 uppercase tracking-tight group-hover/card:text-indigo-600 group-hover/card:translate-x-1 transition-all duration-200">
+                  <h3 className="font-serif text-base font-semibold text-slate-900 uppercase tracking-tight group-hover/card:text-indigo-600 group-hover/card:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-indigo-600 rounded-none shrink-0" />
                     {group.title}
                   </h3>
-                  <p className="text-xs font-serif text-slate-500 italic leading-relaxed mt-2 mb-6">
+                  <p className="text-xs font-serif text-slate-500 italic leading-relaxed mt-2 mb-4">
                     {group.description}
                   </p>
                 </div>
 
                 {/* Sub-grid list of Skills */}
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-dashed border-slate-200 mt-auto">
-                  {group.skills.map((skill, sIdx) => (
+                <div className="flex flex-wrap gap-2 pt-3 border-t border-dashed border-slate-200 mt-auto">
+                  {group.skills.map((skill) => (
                     <div
                       key={skill}
-                      className="group/skill flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 border border-slate-200/80 hover:bg-slate-950 hover:border-slate-950 hover:text-white transition-all duration-150 rounded-none cursor-default select-none"
+                      className="group/skill flex items-center px-2.5 py-1 bg-slate-50 border border-slate-200/80 hover:bg-slate-950 hover:border-slate-950 hover:text-white transition-all duration-150 rounded-none cursor-default select-none"
                     >
-                      <span className="font-mono text-[9px] text-indigo-600 font-bold group-hover/skill:text-indigo-400 transition-colors duration-150">
-                        {(sIdx + 1).toString().padStart(2, "0")}
-                      </span>
                       <span className="font-mono text-[10px] sm:text-xs text-slate-700 group-hover/skill:text-slate-100 transition-colors duration-150 tracking-tight">
                         {skill}
                       </span>
