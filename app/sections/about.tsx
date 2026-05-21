@@ -29,7 +29,7 @@ export default function About() {
               </div>
             </div>
             <span className="font-mono text-[9px] uppercase tracking-wider text-slate-400 mt-3 select-none">
-              Fig. 01 — Dossier Portrait
+              
             </span>
           </div>
 
@@ -43,7 +43,7 @@ export default function About() {
                 Basil Varghesekutty
               </h2>
               <p className="text-xs font-mono uppercase tracking-widest text-indigo-600 font-bold mt-1">
-                Data Scientist & ML Practitioner
+                AI ENGINEER
               </p>
             </div>
             
@@ -55,7 +55,7 @@ export default function About() {
             <div className="border-t border-b border-dashed border-slate-200 py-5 my-6 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 text-left">
               <div>
                 <span className="block font-mono text-[9px] uppercase tracking-widest text-slate-400">Position</span>
-                <span className="font-serif text-sm text-slate-800 font-semibold">Data Science Practitioner</span>
+                <span className="font-serif text-sm text-slate-800 font-semibold">AI Engineer</span>
               </div>
               <div>
                 <span className="block font-mono text-[9px] uppercase tracking-widest text-slate-400">Location</span>
@@ -76,7 +76,7 @@ export default function About() {
               <a href="/Basil_CV.pdf" download className="inline-block">
                 <button className="flex items-center gap-2 border border-slate-300 hover:border-slate-800 text-slate-700 hover:text-slate-900 font-mono text-xs uppercase tracking-widest px-6 py-3 transition-all duration-200 cursor-pointer bg-white hover:bg-slate-50 select-none">
                   <Download size={14} />
-                  Download Curriculum Vitae
+                  Download CV
                 </button>
               </a>
             </div>

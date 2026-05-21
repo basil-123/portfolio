@@ -297,9 +297,14 @@ export default function Projects() {
 
           {/* Simple List of Cards */}
           <div className="flex flex-col gap-8 w-full">
-            {projectsList.map((project) => (
-              <div
+            {projectsList.map((project, idx) => (
+              <motion.div
                 key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.05, ease: "easeOut" }}
+                whileTap={{ scale: 0.98 }}
                 className="bg-white border border-slate-200/90 rounded-[6px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col justify-between cursor-pointer"
                 onClick={() => {
                   setSelectedProject(project)
@@ -324,7 +329,7 @@ export default function Projects() {
                     <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                   </div>
                 </div>
-
+ 
                 {/* 2. Content Block */}
                 <div className="p-5 flex flex-col justify-between space-y-5">
                   <div>
@@ -338,13 +343,13 @@ export default function Projects() {
                     <div className="border-y border-dashed border-slate-200 py-1.5 text-[10px] font-mono text-slate-500 italic my-2 leading-relaxed">
                       {project.subtitle}
                     </div>
-
+ 
                     {/* Editorial Body Text */}
                     <p className="text-slate-600 text-xs leading-relaxed font-serif text-justify line-clamp-5">
                       {project.editorial}
                     </p>
                   </div>
-
+ 
                   {/* Technical Video/Image Frame */}
                   <div className="bg-[#fcfbf9] border border-slate-200 rounded-[4px] p-1.5 shadow-sm">
                     <div className="aspect-[16/10] bg-slate-900 rounded-[2px] overflow-hidden relative border border-slate-200">
@@ -367,7 +372,7 @@ export default function Projects() {
                       )}
                     </div>
                   </div>
-
+ 
                   {/* Tech Badges */}
                   <div className="flex flex-wrap gap-1.5 pt-1 border-t border-slate-100">
                     {project.tech.map((tech) => (
@@ -379,7 +384,7 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-
+ 
                   {/* Mobile Footer Action */}
                   <div className="flex items-center justify-between text-[10px] font-mono text-indigo-600 font-bold border-t border-slate-100 pt-3 shrink-0">
                     <span className="flex items-center gap-1.5">
@@ -390,7 +395,7 @@ export default function Projects() {
                     </span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
