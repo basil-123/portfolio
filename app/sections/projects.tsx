@@ -299,7 +299,7 @@ export default function Projects() {
       className="relative z-10 bg-[#faf9f6]/40 border-t border-b border-slate-200/50 h-[300vh]"
     >
       {/* Sticky Viewport Container */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-10 sm:pt-20 overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-9 sm:pt-20 overflow-hidden">
         
         {/* Section Heading */}
         <div className="text-center z-20 px-4 shrink-0 mb-4 sm:mb-6">
@@ -313,7 +313,7 @@ export default function Projects() {
         </div>
 
         {/* Progress Track and Stack Deck Wrapper */}
-        <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[620px] sm:h-[660px] mt-4 sm:mt-8">
+        <div className="w-full max-w-5xl px-4 sm:px-6 relative flex gap-8 items-center h-[620px] sm:h-[660px] mt-2 sm:mt-8">
           
           {/* Scroll Progress Timeline Track (Left Side) */}
           <div className="relative w-0.5 bg-slate-200/80 hidden lg:block h-[450px] shrink-0 z-20">
