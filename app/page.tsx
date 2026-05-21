@@ -25,15 +25,21 @@ export default function Home() {
       {/* Base Solid Background Layer to prevent stacking glitches with body */}
       <div className="fixed inset-0 bg-[#f8fafc] -z-20 pointer-events-none" />
 
-      {/* Premium Professional Background system */}
+      {/* Premium Professional Background system - Composited scroll transform */}
       <motion.div 
         animate={{
-          backgroundPosition: ["0px 0px", "50px 50px"],
+          x: [0, 50],
+          y: [0, 50],
           opacity: [0.5, 0.8, 0.5]
         }}
         transition={{
-          backgroundPosition: {
-            duration: 60,
+          x: {
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear"
+          },
+          y: {
+            duration: 30,
             repeat: Infinity,
             ease: "linear"
           },
@@ -43,7 +49,7 @@ export default function Home() {
             ease: "easeInOut"
           }
         }}
-        className="fixed inset-0 grid-bg -z-10 pointer-events-none" 
+        className="fixed -inset-[100px] grid-bg -z-10 pointer-events-none" 
       />
       
       {/* Animated Ambient Blur Blobs */}
@@ -58,7 +64,7 @@ export default function Home() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="fixed -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-indigo-300/35 blur-[120px] -z-10 pointer-events-none" 
+        className="fixed -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-indigo-300/35 blur-[90px] -z-10 pointer-events-none will-change-transform" 
       />
       
       <motion.div 
@@ -72,7 +78,7 @@ export default function Home() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="fixed top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-sky-300/40 blur-[140px] -z-10 pointer-events-none" 
+        className="fixed top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-sky-300/40 blur-[100px] -z-10 pointer-events-none will-change-transform" 
       />
       
       <motion.div 
@@ -86,7 +92,7 @@ export default function Home() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="fixed -bottom-40 left-1/4 w-[600px] h-[600px] rounded-full bg-rose-200/40 blur-[130px] -z-10 pointer-events-none" 
+        className="fixed -bottom-40 left-1/4 w-[600px] h-[600px] rounded-full bg-rose-200/40 blur-[90px] -z-10 pointer-events-none will-change-transform" 
       />
 
       <main className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 space-y-20 md:space-y-36 pb-16 md:pb-32">
